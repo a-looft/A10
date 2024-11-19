@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>A10</title>
+    </head>
+
+    <body>
+        <h1>Enter Your Name:</h1>
+        <input type="text" id="name-input" placeholder="Enter here">
+        <button onclick="setCookie('username', document.getElementById('name-input').value)">Submit</button>
+
+        <script>
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + "; path=/"; 
+                displayGreeting(); 
+            }
+            
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1); 
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length); 
+                    }
+                }
+                return ""; 
+            }
+            
+            function displayGreeting() {
+                let username = getCookie("username");
+                if (username != "") {
+                    alert("Welcome back, " + username + "!");
+                }
+            }
+            
+            window.onload = displayGreeting;
+        </script>
+
+        <footer>
+            <p>&copy; Aida Looft 2024</p>
+        </footer>
+    </body>
+</html>
